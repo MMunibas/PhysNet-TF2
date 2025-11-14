@@ -23,7 +23,7 @@ conda activate physnet-tf2
 ```
 For system with GPU:
 ```bash
-pip install tensorflow[and-gpu] ase tensorboard
+pip install tensorflow[and-cuda] ase tensorboard
 ```
 For system without GPU:
 ```bash
