@@ -18,16 +18,16 @@ Git repository for original (TensorFlow 1) version of PhysNet: [https://github.c
 2. In terminal, initialize the conda (`base`) environment. 
 3. Create a environment of PhysNet with Tensorflow2.
 ```bash
-    conda create -n physnet-tf2 python=3.13
-    conda activate physnet-tf2
+conda create -n physnet-tf2 python=3.13
+conda activate physnet-tf2
 ```
 For system with GPU:
 ```bash
-    pip install tensorflow[and-gpu] ase tensorboard
+pip install tensorflow[and-gpu] ase tensorboard
 ```
 For system without GPU:
 ```bash
-    pip install tensorflow ase tensorboard
+pip install tensorflow ase tensorboard
 ```
 
 ## Training PhysNet:
