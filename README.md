@@ -17,16 +17,16 @@ Git repository for original (TensorFlow 1) version of PhysNet: [https://github.c
 1. Install Anaconda or Miniconda on the system. Link: [www.anaconda.com](https://www.anaconda.com).
 2. In terminal, initialize the conda (`base`) environment. 
 3. Create a environment of PhysNet with Tensorflow2.
-```sh
+```bash
     conda create -n physnet-tf2 python=3.13
     conda activate physnet-tf2
 ```
 For system with GPU:
-```sh
+```bash
     pip install tensorflow[and-gpu] ase tensorboard
 ```
 For system without GPU:
-```sh
+```bash
     pip install tensorflow ase tensorboard
 ```
 
@@ -52,7 +52,7 @@ For system without GPU:
 
 3. Load the ``physnet-tf2`` conda environment, and then run using:
     
-```sh
+```bash
 python3 train.py @config.txt
 ```
 
@@ -60,7 +60,7 @@ python3 train.py @config.txt
 
 3. Modify the submit.run file according to cluster specifications.
 4. Submit using the following command:
-```sh
+```bash
 sbatch submit.sh
 ```
 
