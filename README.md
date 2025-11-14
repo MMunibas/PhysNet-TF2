@@ -73,7 +73,7 @@ sbatch submit.sh
 > To check the runtime CUDA version of the local computer (or node), one can use `nvidia-smi` command.
 
 > [!NOTE]
-> This version has been tested on NVIDIA 2080, 3090 and 4090 GPU cards, along with their submodels.
+> This version has been tested on NVIDIA RTX 2080Ti, RTX 3080, RTX 3090, RTX 3090 Ti and RTX 4090 GPU cards, along with their submodels.
 
 ## Citation:
 
