@@ -61,7 +61,7 @@ python3 train.py @config.txt
 3. Modify the submit.run file according to cluster specifications.
 4. Submit using the following command:
 ```bash
-sbatch submit.sh
+sbatch submit.run
 ```
 
 ## GPU Compatibility:
