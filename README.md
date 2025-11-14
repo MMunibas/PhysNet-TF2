@@ -63,3 +63,29 @@ python3 train.py @config.txt
 ```sh
 sbatch submit.sh
 ```
+
+## GPU Compatibility:
+
+> [!WARNING]
+> Although the latest CUDA version released is CUDA 13, Tensorflow 2 currently supports only until CUDA 12. Therefore, please ensure that **CUDA 12 is enabled in your system during runtime.**
+
+> [!TIP]
+> To check the runtime CUDA version of the local computer (or node), one can use `nvidia-smi` command.
+
+> [!NOTE]
+> This version has been tested on NVIDIA 2080, 3090 and 4090 GPU cards, along with their submodels.
+
+## Citation:
+
+```bibtex
+@article{unke2019physnet,
+  title={PhysNet: A neural network for predicting energies, forces, dipole moments, and partial charges},
+  author={Unke, Oliver T and Meuwly, Markus},
+  journal={Journal of chemical theory and computation},
+  volume={15},
+  number={6},
+  pages={3678--3693},
+  year={2019},
+  publisher={ACS Publications}
+}
+```
