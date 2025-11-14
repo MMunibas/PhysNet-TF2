@@ -12,7 +12,7 @@ Git repository for original (TensorFlow 1) version of PhysNet: [https://github.c
 - Python 3.13
 - CUDA 12 (for running on GPUs only)
 
-## Installation instructions:
+## Pre-requisite setup instructions:
 
 1. Install Anaconda or Miniconda on the system. Link: [www.anaconda.com](https://www.anaconda.com).
 2. In terminal, initialize the conda (`base`) environment. 
