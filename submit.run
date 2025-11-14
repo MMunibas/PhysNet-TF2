@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --job-name=PhysNet-TF2
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks=4
+#SBATCH --mem=6GB  
+#SBATCH --gres=gpu:1
+
+
+echo $HOSTNAME
+
+#Additional code to import modules
+#
+#
+#
+
+# If anaconda is installed in a non-standard location, modify the following line
+source $HOME/anaconda3/bin/activate physnet-tf2
+
+
+python3 train.py @config.txt
