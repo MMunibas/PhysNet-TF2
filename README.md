@@ -37,12 +37,12 @@ pip install tensorflow ase tensorboard
 | Property | Symbol | Dimension of array | Data type | Units |  Remarks |
 |---------|-----|-----|------|--------|---|
 | Geometry index | N | n | int ||
-| Energy | E | n | float | Hartree |  Individual atomic contributions removed |
+| Energy | E | n | float | eV |  Individual atomic contributions removed |
 | Charge | Q | n | float | e | Total charge on molecule |
-| Dipole moment | D | n x 3 | float | Debye | Total dipole moment of molecule|
+| Dipole moment | D | n x 3 | float | a.u. | Total dipole moment of molecule|
 | Atomic number | Z | n x m | int |||
 | Positions | R | n x m x 3 |float| Angstrom ||
-| Forces | F | n x m x 3 | float | Hartree/Bohr || 
+| Forces | F | n x m x 3 | float | eV/Angstrom || 
 
 2. Modify the `config.txt` file according to specification. Ponder on the following:
    - `num_train` and `num_valid`: Number of points in training and validation sets respectively. The rest are used for test set. A general rule of thumb for split can be 80%, 10% and 10% for training, validation and testing.
