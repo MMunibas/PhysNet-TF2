@@ -36,7 +36,7 @@ pip install tensorflow ase tensorboard
 
 | Property | Symbol | Dimension of array | Data type | Units |  Remarks |
 |---------|-----|-----|------|--------|---|
-| Geometry index | N | n | int ||
+| No. of atoms | N | n | int ||
 | Energy | E | n | float | eV |  Individual atomic contributions removed |
 | Charge | Q | n | float | e | Total charge on molecule |
 | Dipole moment | D | n x 3 | float | a.u. | Total dipole moment of molecule|
