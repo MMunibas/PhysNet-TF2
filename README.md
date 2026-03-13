@@ -75,6 +75,18 @@ sbatch submit.run
 > [!NOTE]
 > This version has been tested on NVIDIA RTX 2080Ti, RTX 3080, RTX 3090, RTX 3090 Ti and RTX 4090 GPU cards, along with their submodels.
 
+## Utilities:
+
+Some utility scripts are also bundled with this software, which are as follows:
+
+- **predict_dataset.py**: Predict the energy, and error for energy and forces in training, validation and test sets.
+- **energy-predict.py**: Predict the energy of a xyz file (multiple frames) using a trained model.
+- **property-predict.py**: Predicts all properties (energy, forces and dipole moments) for a xyz file (multiple frames) using a trained model and store as a npz file, which can be used for further training.
+- **md-sim.py**: Carry out MD simulation using PhysNet model.
+- **dmc.py**: Carry out diffusion Monte Carlo sampling. The file _dmc_template.txt_ contains parameters for the same.
+- **minimum_dynamic_path.py**: Compute the minimum dynamic path for a transition state, for both forward and reverse directions.
+- **adpative-sampling.py**: Compute the adaptive sampling trajectory for multiple models, identify cases with large mismatch in energy between models.
+
 ## Citation:
 
 ```bibtex
