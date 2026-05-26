@@ -86,6 +86,15 @@ Some utility scripts are also bundled with this software, which are as follows:
 - **dmc.py**: Carry out diffusion Monte Carlo sampling. The file _dmc_template.txt_ contains parameters for the same.
 - **minimum_dynamic_path.py**: Compute the minimum dynamic path for a transition state, for both forward and reverse directions.
 - **adpative-sampling.py**: Compute the adaptive sampling trajectory for multiple models, identify cases with large mismatch in energy between models.
+- **normal-mode-npz.py**: Compute normal mode and store the data as a npz file.
+
+## Additional functions:
+
+### Gaussian 16 interface
+
+- **opt_hcooh.com**: Optimize with Gaussian using PhysNet MLFF.
+- **nnvpt2_hcooh.com**: Compute anharmonic frequencies with Gaussian using PhysNet MLFF.
+
 
 ## Citation:
 

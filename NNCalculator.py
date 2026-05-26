@@ -148,7 +148,7 @@ class NNCalculator:
             if(len(self.checkpoint) > 1):
                 self._energy_stdev = np.sqrt(self.energy_stdev/len(self.checkpoint))
 
-        self._last_energy = np.array(1*[self.last_energy]) #prevents some problems...
+        self._last_energy = np.array(1*[self.last_energy]).item() #prevents some problems...
 
         #store copy of atoms
         self._last_atoms = atoms.copy()

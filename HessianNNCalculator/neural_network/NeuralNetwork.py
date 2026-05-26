@@ -171,7 +171,8 @@ class NeuralNetwork:
             energy = self.energy_from_scaled_atomic_properties(Ea, Qa, Dij, Z, idx_i, idx_j, batch_seg)
             forces = -tf.convert_to_tensor(tf.gradients(tf.reduce_sum(energy), R)[0])
             hessian = tf.convert_to_tensor(tf.hessians(tf.reduce_sum(energy), R)[0])
-        return energy, forces, hessian
+            dipder= [tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[0], R)[0]), tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[1], R)[0]), tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[2], R)[0])]
+        return energy, forces, hessian, dipder
 
     #calculates the energy given the atomic properties (in order to prevent recomputation if atomic properties are calculated)
     def energy_from_atomic_properties(self, Ea, Qa, Dij, Z, idx_i, idx_j, Q_tot=None, batch_seg=None):
@@ -188,7 +189,8 @@ class NeuralNetwork:
             energy = self.energy_from_atomic_properties(Ea, Qa, Dij, Z, idx_i, idx_j, Q_tot, batch_seg)
             forces = -tf.convert_to_tensor(tf.gradients(tf.reduce_sum(energy), R)[0])
             hessian = tf.convert_to_tensor(tf.hessians(tf.reduce_sum(energy), R)[0])
-        return energy, forces, hessian
+            dipder= [tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[0], R)[0]), tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[1], R)[0]), tf.convert_to_tensor(tf.gradients(tf.tensordot(Qa, R, axes=1)[2], R)[0])]
+        return energy, forces, hessian, dipder
 
     #calculates the total energy (including electrostatic interactions)
     def energy(self, Z, R, idx_i, idx_j, Q_tot=None, batch_seg=None, offsets=None, sr_idx_i=None, sr_idx_j=None, sr_offsets=None):
@@ -201,8 +203,8 @@ class NeuralNetwork:
     def energy_and_forces(self, Z, R, idx_i, idx_j, Q_tot=None, batch_seg=None, offsets=None, sr_idx_i=None, sr_idx_j=None, sr_offsets=None):
         with tf.name_scope("energy_and_forces"):
             Ea, Qa, Dij, _ = self.atomic_properties(Z, R, idx_i, idx_j, offsets, sr_idx_i, sr_idx_j, sr_offsets)
-            energy, forces, hessian = self.energy_and_forces_from_atomic_properties(Ea, Qa, Dij, Z, R, idx_i, idx_j, Q_tot, batch_seg)
-        return energy, forces, hessian
+            energy, forces, hessian, dipder = self.energy_and_forces_from_atomic_properties(Ea, Qa, Dij, Z, R, idx_i, idx_j, Q_tot, batch_seg)
+        return energy, forces, hessian, dipder
 
     #returns scaled charges such that the sum of the partial atomic charges equals Q_tot (defaults to 0)
     def scaled_charges(self, Z, Qa, Q_tot=None, batch_seg=None):

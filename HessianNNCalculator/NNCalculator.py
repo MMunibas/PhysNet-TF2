@@ -83,7 +83,7 @@ class NNCalculator:
         else:
             Ea, Qa, Dij, nhloss = self.nn.atomic_properties(self.Z, self.R, self.idx_i, self.idx_j, self.offsets)
         self._charges = self.nn.scaled_charges(self.Z, Qa, self.Q_tot)
-        self._energy, self._forces, self._hessian = self.nn.energy_and_forces_from_scaled_atomic_properties(Ea, self.charges, Dij, self.Z, self.R, self.idx_i, self.idx_j)
+        self._energy, self._forces, self._hessian, self._dipder = self.nn.energy_and_forces_from_scaled_atomic_properties(Ea, self.charges, Dij, self.Z, self.R, self.idx_i, self.idx_j)
 
         #create TensorFlow session and load neural network(s)
         self._sess = tf.Session()
@@ -128,19 +128,20 @@ class NNCalculator:
         #calculate energy and forces (in case multiple NNs are used as ensemble, this forms the average)
         if(type(self.checkpoint) is not list): #only one NN
             if self.calc_hessian:
-                self._last_energy, self._last_forces, self._last_charges, self._last_hessian = self.sess.run([self.energy, self.forces, self.charges, self.hessian], feed_dict=feed_dict)
+                self._last_energy, self._last_forces, self._last_charges, self._last_hessian, self._last_dipder  = self.sess.run([self.energy, self.forces, self.charges, self.hessian, self.dipder], feed_dict=feed_dict)
             else:
-                self._last_energy, self._last_forces, self._last_charges = self.sess.run([self.energy, self.forces, self.charges], feed_dict=feed_dict)
+                self._last_energy, self._last_forces, self._last_charges, self._last_dipder = self.sess.run([self.energy, self.forces, self.charges, self.dipder], feed_dict=feed_dict)
             self._energy_stdev = 0
         else: #ensemble is used
             for i in range(len(self.checkpoint)):
                 self.nn.restore(self.sess, self.checkpoint[i])
-                energy, forces, charges, hessian = self.sess.run([self.energy, self.forces, self.charges, self.hessian], feed_dict=feed_dict)
+                energy, forces, charges, hessian, dipder = self.sess.run([self.energy, self.forces, self.charges, self.hessian, self.dipder], feed_dict=feed_dict)
                 if i == 0:
                     self._last_energy  = energy
                     self._last_forces  = forces
                     self._last_charges = charges
                     self._last_hessian = hessian
+                    self._last_dipder  = dipder
                     self._energy_stdev = 0
                 else:
                     n = i+1
@@ -162,7 +163,7 @@ class NNCalculator:
     def get_potential_energy(self, atoms, force_consistent=False):
         if self.calculation_required(atoms):
             self._calculate_all_properties(atoms)
-        return self.last_energy
+        return self.last_energy.item()
 
     def get_forces(self, atoms):
         if self.calculation_required(atoms):
@@ -178,6 +179,11 @@ class NNCalculator:
         if self.calculation_required(atoms):
             self._calculate_all_properties(atoms)
         return self.last_hessian
+
+    def get_dipder(self, atoms):
+        if self.calculation_required(atoms):
+            self._calculate_all_properties(atoms)
+        return self.last_dipder
 
     @property
     def sess(self):
@@ -202,6 +208,10 @@ class NNCalculator:
     @property
     def last_hessian(self):
         return self._last_hessian
+
+    @property
+    def last_dipder(self):
+        return self._last_dipder
 
     @property
     def energy_stdev(self):
@@ -278,3 +288,7 @@ class NNCalculator:
     @property
     def hessian(self):
         return self._hessian
+
+    @property
+    def dipder(self):
+        return self._dipder
