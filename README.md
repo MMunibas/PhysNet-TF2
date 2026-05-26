@@ -95,6 +95,9 @@ Some utility scripts are also bundled with this software, which are as follows:
 - **opt_hcooh.com**: Optimize with Gaussian using PhysNet MLFF.
 - **nnvpt2_hcooh.com**: Compute anharmonic frequencies with Gaussian using PhysNet MLFF.
 
+> [!WARNING]
+> All Gaussian jobs should be CPU only running on a single core.
+
 
 ## Citation:
 
